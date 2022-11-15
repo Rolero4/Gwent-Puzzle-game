@@ -29,7 +29,6 @@ class Card{
     };
 };
 
-
 // #region elements
 const decreaseButton = document.getElementById('decreaseButton');
 const increaseButton = document.getElementById('increaseButton');
@@ -48,18 +47,17 @@ const powerSpan = document.getElementById("power-info");
 const typeSpan = document.getElementById("type-info");
 const raritySpan = document.getElementById("rarity-info");
 const factionSpan = document.getElementById("faction-info");
-
 const guessSpan = document.getElementById("guess-info");
 //#endregion
 
-//#region  global variables
+//#region global variables
 let displayedCard;
 let blurFactor;
 let checkBoxesFlags = [false, false, false, false, false, false];
 let globalData;
 //#endregion
 
-// api connector
+//#region Preparing variables
 function api_connect(){
     fetch("https://api.gwent.one?key=data&response=json&linkart")
     .then(response => response.json())
@@ -77,57 +75,32 @@ function dataReady(data){
     startButton.disabled = false;
 };
 
+function createDataList(){
+    let values = [];
+    for(let i=0; i< Object.keys(globalData).length; i++){
+        values.push(globalData[i].name) 
+    }   
 
+    let dataList = document.createElement('datalist');
+    dataList.id = "cards_list";
+    
+    values.forEach(value =>{
+        let option = document.createElement('option');
+        option.innerHTML = value;
+        option.value = value;
+        dataList.appendChild(option);
+    })
+    document.body.appendChild(dataList);
+}
+
+//#endregion
+
+//#region Preparing the game
 function startTheGame(){
     startButton.style.display = "none";
     rollCard();
     blurImage();
     addListnersAndEnableElements();
-}
-
-function rollCard(){
-    let id = randomizer(Object.keys(globalData).length);
-    while(globalData[id].attributes.set == 'NonOwnable')
-        id = randomizer(Object.keys(globalData).length)
-    displayedCard = new Card(globalData[id]);
-    displayedCard.setImage();
-    resetInfo();
-    console.log(id);
-    console.log(globalData[id].name);
-}
-
-function resetInfo(){
-    input.disabled = false;
-    guessSpan.innerText = "";  
-    input.value = "";
-    input.style.border = "solid rgb(0, 0, 0)"
-    blurFactor = 30;
-    blurImage();
-    checkBoxesFlags = [false, false, false, false, false, false];
-    checkBoxesVisibility();
-    for(let i = 0; i < checkBoxes.length; i++){
-        let el = checkBoxes[i];
-        el.checked = false;
-    }
-}
-
-
-function randomizer(maxvalue){
-    return Math.floor(Math.random() * maxvalue);
-};
-
-function sendGuess(){
-    if(input.value == displayedCard.name){
-        input.style.border = "solid rgb(144, 238, 144)"
-        guessSpan.innerText = "Correct!";
-        guessSpan.style.color = "rgb(144, 238, 144)"
-        input.disabled = true;
-    }else{
-        input.style.border = "solid rgb(223, 32, 77)"
-        input.value = "";
-        guessSpan.innerText = "Incorrect!"
-        guessSpan.style.color = "solid rgb(223, 32, 77)"
-    };
 }
 
 function addListnersAndEnableElements(){
@@ -158,19 +131,67 @@ function addListnersAndEnableElements(){
     reRollButton.addEventListener('click', rollCard)
 }
 
+//#endregion
+
+//#region cycle functions of the game
+function rollCard(){
+    let id = randomizer(Object.keys(globalData).length);
+    while(globalData[id].attributes.set == 'NonOwnable')
+        id = randomizer(Object.keys(globalData).length)
+    displayedCard = new Card(globalData[id]);
+    displayedCard.setImage();
+    resetInfo();
+    console.log(id);
+    console.log(globalData[id].name);
+}
+
+function randomizer(maxvalue){
+    return Math.floor(Math.random() * maxvalue);
+};
+
+function resetInfo(){
+    input.disabled = false;
+    guessSpan.innerText = "";  
+    input.value = "";
+    input.style.border = "solid rgb(0, 0, 0)"
+    blurFactor = 30;
+    blurImage();
+    checkBoxesFlags = [false, false, false, false, false, false];
+    checkBoxesVisibility();
+    for(let i = 0; i < checkBoxes.length; i++){
+        let el = checkBoxes[i];
+        el.checked = false;
+    }
+}
+
+function sendGuess(){
+    if(input.value == displayedCard.name){
+        input.style.border = "solid rgb(144, 238, 144)"
+        guessSpan.innerText = "Correct!";
+        guessSpan.style.color = "rgb(144, 238, 144)"
+        input.disabled = true;
+    }else{
+        input.style.border = "solid rgb(223, 32, 77)"
+        input.value = "";
+        guessSpan.innerText = "Incorrect!"
+        guessSpan.style.color = "solid rgb(223, 32, 77)"
+    };
+}
+
+//#endregion
 
 //#region blur manipulation
-blurImage = function(){
+function blurImage(){
     imgContainer.style.filter = 'blur('+ blurFactor + 'px)';
 };
 
-increaseBlur = function(){
+function increaseBlur(){
     if(blurFactor<50)
     blurFactor+=2;
     blurImage();
 };
 
-decreaseBlur = function(){
+function decreaseBlur(){
     if(blurFactor>0)
         blurFactor-=2;
     blurImage();
@@ -179,12 +200,12 @@ decreaseBlur = function(){
 //#endregion
 
 //#region checkBoxes
-checkBoxClick = function(e){
+function checkBoxClick(e){
     let id = e.target.dataset.id;
     checkBoxesFlag(id);
 }
 
-checkBoxesFlag = function(id){
+function checkBoxesFlag(id){
     if(checkBoxesFlags[id] == false)
         checkBoxesFlags[id] = true;
     else
@@ -192,7 +213,7 @@ checkBoxesFlag = function(id){
     checkBoxesVisibility();
 }
 
-checkBoxesVisibility = function(){
+function checkBoxesVisibility(){
     const visibilityArr = checkBoxesFlags.map(function(element){
         if(element == false)
             return "hidden"
@@ -213,56 +234,3 @@ checkBoxesVisibility = function(){
 
 api_connect()
 startButton.addEventListener('click', startTheGame);
-
-
-createDataList = function(){
-    let values = [];
-    for(let i=0; i< Object.keys(globalData).length; i++){
-        values.push(globalData[i].name) 
-    }   
-
-    let dataList = document.createElement('datalist');
-    dataList.id = "cards_list";
-    
-    values.forEach(value =>{
-        let option = document.createElement('option');
-        option.innerHTML = value;
-        option.value = value;
-        dataList.appendChild(option);
-    })
-    document.body.appendChild(dataList);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* csv parser
-Papa.parse('./resources/index.csv', {
-    download: true,
-    header: true,
-    skipEmptyLines: false,
-    complete: function(results){
-        // bład z pytajnikami w nazwach 
-        results.data.forEach(element => {
-            if(" " + element.Title_Gdrive == displayedCard.name || element.Title_Gdrive == displayedCard.name){
-                displayedCard.imgID = element.CardID_20220523
-                console.log(displayedCard.imgID)
-                changeImage(displayedCard)
-            }
-        });
-        //console.log(results.data[0].CardID_20220523)
-                        //console.log(element.Title_Gdrive)
-        
-    }
-})
-*/
