@@ -1,0 +1,179 @@
+@media screen and (max-width: 600px) {
+    .header-title{
+        text-align: left;
+        color: white;
+        width: 100%;
+        margin: 0 auto;
+    }
+    
+    .header-title h1{
+        font-size: 2.5rem;
+        padding: 0.5rem 0;
+        margin: 0 1rem;
+        width: 100%;
+    }
+    
+    .header-title h2{
+        font-size: 1.5rem;
+        padding: 0;
+        margin: 0 1rem;
+        width: 100%;
+    }
+    
+    .app-container{
+        margin: 10px auto;
+        display: flex;
+        flex-direction: column;
+        padding: 0 1rem;
+        width: 100%;
+        margin: 0 auto;
+    }
+    
+    .higher-container{
+        flex-direction: column;
+    }
+    
+    .left-higher-container{
+        width: 80%;
+        margin: 0 auto;
+    }
+    
+    
+    .right-higher-container{
+        width: 100%;
+        padding: 1rem;
+        margin-right: 0rem;     
+    }
+    
+    .info-cotainer{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    
+    #re-roll{
+        width: 100%;
+        text-align: center;
+    }
+    
+    #start-button{
+        width: 100%;
+        text-align: center;
+    }
+    
+    .break{
+        margin-left: 1rem;
+    }
+    
+    .one-info{
+        width: 100%;
+        margin: 0.2rem 0;
+        padding: 0.1rem;
+        padding-right: 0;
+    }
+    
+    .check{
+        font-size: 0.5rem;
+        height: 1rem;
+        width: 1rem;
+        margin: 0;
+    }
+    
+    .check:checked{
+        color: rgb(223, 32, 77);
+    }
+    
+    .card-info{
+        width: 90%;
+        margin-left: 1rem;
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+    
+    .card-info span{
+        color: rgb(223, 32, 77);
+        visibility: hidden;
+        font-weight: bold;
+        padding-right: 1rem;
+    }
+    
+    .one-info:last-child{
+        margin: 0   ;
+    }
+    
+    
+    
+    /* lower fragment */
+    .lower-container{
+        flex-direction: column;
+    }
+    
+    /* Blur manipulation fragment */
+    
+    .left-lower-container{
+        flex-direction: row;
+        width: 100%;
+        padding: 0 1rem;
+        margin: 0 auto;
+        text-align: center;
+        justify-content: center ;
+    }
+    
+    .left-lower-container .card-info{
+        text-align: left;
+        margin: 0.5rem auto;
+        align-items: center;
+    }
+    
+    .blur-buttons{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .blur-buttons.btn{
+        margin: 0.5rem;
+        padding: 0.1rem;
+        margin: 0.5rem;
+        font-size: 1rem;
+        font-weight: bold;
+
+    }
+    
+    .btn:active{
+        color: rgb(223, 32, 77);
+        border-color: rgb(223, 32, 77);
+        transition: all 0.3s;
+    }
+    
+    /* sending fragment */
+    
+    .right-lower-container{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 0;
+        margin: 0 auto;
+    }
+    
+    .right-lower-container .card-info{
+        padding: 1rem 0;
+    }
+    
+    .sending-container{
+        justify-content: space-between;
+    }
+    
+    .sending-container input{
+        width: 15rem;
+        font-size: smaller;
+        padding: 0.3rem;
+        margin: 0.5rem;
+    }
+
+    #send-answer{
+        font-size: 1rem;
+        margin: 0.5rem;
+    }
+}
+

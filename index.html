@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="imagetoolbar" content="no"/>
+    <title>Gwent Card Guess</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/style-mobile.css">
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-title">
+            <h1>Gwent Puzzle Game!</h1>
+            <h2>Guess which card is it?</h2>
+        </div>
+    </header>
+
+    <div class="app-container">
+        <div class="higher-container">
+            <div class="left-higher-container">
+                <img id="card-img" src="resources/section-home-01.png">
+            </div>
+            <div class="right-higher-container">
+                <div class="info-cotainer">
+                    <div class="one-info">
+                        <input type="checkbox" class="check" data-id="0" disabled>
+                        <label for="rarity-info" class="card-info">Faction: <span id="faction-info"></span></label>
+                    </div>
+                    <div class="one-info">
+                        <input type="checkbox" class="check" data-id="1" disabled>
+                        <label for="type-info" class="card-info">Type: <span id="type-info"></span></label>
+                    </div>
+                    <div class="one-info">
+                        <input type="checkbox" class="check" data-id="2" disabled>
+                        <label for="rarity-info" class="card-info">Rarity: <span id="rarity-info"></span></label>
+                    </div>
+                    <div class="one-info">
+                        <input type="checkbox" class="check" data-id="3" disabled>
+                        <label for="provision-info" class="card-info">Provision: <span id="provision-info"></span></label>
+                    </div>
+                    <div class="one-info">
+                        <input type="checkbox" class="check" data-id="4" disabled>
+                        <label for="power-info" class="card-info">Power: <span id="power-info"></span></label>
+                    </div>
+                    <div class="one-info">
+                        <input type="checkbox" class="check" data-id="5" disabled>
+                        <label for="armor-info" class="card-info">Armor: <span id="armor-info"></span></label>
+                    </div>
+                    <!-- start button -->       
+                    <div class="one-info">
+                        <button id="start-button" class="btn" disabled> Start the Game </button>
+                        <button id="re-roll" class="btn"> Roll again <i class="fa-solid fa-arrows-rotate break"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="lower-container">
+            <div class="left-lower-container">
+                <label class="card-info">Blur: <br></label>
+                <div class="blur-buttons">
+                    <button class="btn" id="decreaseButton" disabled> Decrease </button>
+                    <button class="btn" id="increaseButton" disabled> Increase </button>
+                </div>
+            </div>
+            <div class="right-lower-container">
+                <label class="card-info" for="your_guess">Your guess:   <span id="guess-info"></span></label>
+                <div class="sending-container">
+                    <input type="text" id="your_guess" list="cards_list" placeholder="" disabled>
+                    <button class="btn" id="send-answer" disabled>Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"></script> -->
+    <script src="./js/app.js"></script>
+</body>
+</html>
